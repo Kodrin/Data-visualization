@@ -112,7 +112,7 @@ window.onload = function(){
   effect.uniforms[ 'scale' ].value = 6;
   composer.addPass( effect );
   var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
-  effect.uniforms[ 'amount' ].value = 0.0015;
+  effect.uniforms[ 'amount' ].value = 0.0001;
   effect.renderToScreen = true;
   composer.addPass( effect );
   //
