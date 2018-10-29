@@ -1,4 +1,18 @@
 window.onload = function(){
+  //get api
+  var sceneAPI = "json/city.list.json";
+  var sceneAPIKey = "114468b15ec16bed1684039fe3b561d8";
+  //get JSON
+  // $.getJSON(sceneAPI,displayResults)
+  //     //fail
+  //     .fail(function() {
+  //       console.log( "error" );
+  //     });
+
+
+
+
+
   //grid var
   var gridX = 100;
   var gridY = 100;
@@ -7,6 +21,9 @@ window.onload = function(){
 
   var gridHelperSize = 50;
   var gridHelperDivisions = 50;
+
+  //Axis variables
+  var axisBounds = 500;
 
   //object storage
   // var gridDot = [];
@@ -26,6 +43,36 @@ window.onload = function(){
   var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
   var cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
+
+  //environment limits
+  var lineMat = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+  var envGeo = new THREE.SphereBufferGeometry( 100, 100, 100 );
+  var envWire = new THREE.WireframeGeometry( envGeo );
+  var envLine = new THREE.LineSegments( envWire );
+  envLine.material.depthTest = false;
+  envLine.material.opacity = 0.25;
+  envLine.material.transparent = true;
+
+  //environment axis
+  var lineAxisX = new THREE.Geometry();
+  lineAxisX.vertices.push(new THREE.Vector3( -axisBounds, 0, 0) );
+  lineAxisX.vertices.push(new THREE.Vector3( axisBounds, 0, 0) );
+  var lineAxisY = new THREE.Geometry();
+  lineAxisY.vertices.push(new THREE.Vector3( 0, -axisBounds, 0) );
+  lineAxisY.vertices.push(new THREE.Vector3( 0, axisBounds, 0) );
+  var lineAxisZ = new THREE.Geometry();
+  lineAxisZ.vertices.push(new THREE.Vector3( 0, 0, -axisBounds) );
+  lineAxisZ.vertices.push(new THREE.Vector3( 0, 0, axisBounds) );
+
+  var lineX = new THREE.Line( lineAxisX, lineMat );
+  var lineY = new THREE.Line( lineAxisY, lineMat );
+  var lineZ = new THREE.Line( lineAxisZ, lineMat );
+
+  //adding env objects
+  scene.add(envLine);
+  scene.add(lineX);
+  scene.add(lineY);
+  scene.add(lineZ);
 
   //data points look
   var gridDotGeo = new THREE.SphereGeometry( 0.1, 32, 32 );
@@ -62,7 +109,7 @@ window.onload = function(){
   composer = new THREE.EffectComposer( renderer );
   composer.addPass( new THREE.RenderPass( scene, camera ) );
   var effect = new THREE.ShaderPass( THREE.DotScreenShader );
-  effect.uniforms[ 'scale' ].value = 4;
+  effect.uniforms[ 'scale' ].value = 6;
   composer.addPass( effect );
   var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
   effect.uniforms[ 'amount' ].value = 0.0015;
