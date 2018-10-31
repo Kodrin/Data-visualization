@@ -1,17 +1,8 @@
 window.onload = function(){
-  //get api
-  var sceneAPI = "json/city.list.json";
-  var sceneAPIKey = "114468b15ec16bed1684039fe3b561d8";
-  //get JSON
-  // $.getJSON(sceneAPI,displayResults)
-  //     //fail
-  //     .fail(function() {
-  //       console.log( "error" );
-  //     });
+  // let canvas = document.getElementById("canvas");
 
-
-
-
+  //get the context
+  // let context = canvas.getContext("2d");
 
   //grid var
   var gridX = 100;
@@ -28,15 +19,25 @@ window.onload = function(){
   //object storage
   // var gridDot = [];
 
+  //labels
+  var labelRenderer;
+
   //three.js essemtials
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var controls = new THREE.OrbitControls( camera );
-
   var renderer = new THREE.WebGLRenderer();
+  //set pixel ratio
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
+  //initialize the 2D renderer for UI
+  labelRenderer = new THREE.CSS2DRenderer();
+  labelRenderer.setSize( window.innerWidth, window.innerHeight );
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = 0;
+  document.body.appendChild( labelRenderer.domElement );
+
 
   //sample cube from example
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -75,7 +76,7 @@ window.onload = function(){
   scene.add(lineZ);
 
   //data points look
-  var gridDotGeo = new THREE.SphereGeometry( 0.1, 32, 32 );
+  var gridDotGeo = new THREE.SphereGeometry( 0.8, 32, 32 );
   var gridDotMat = new THREE.MeshBasicMaterial( { color: 0xffffff } )
 
   //defines the grid
@@ -87,7 +88,7 @@ window.onload = function(){
   var helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
   scene.add( helper );
 
-  //background
+  //background dots
   for (var i = 0; i < gridX; i++) {
         var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
         gridDot.position.x = Math.random() * 800 - 400;
@@ -97,13 +98,46 @@ window.onload = function(){
   }
 
   //data point
-  for (var i = 0; i < gridX; i++) {
-        var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-        gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-        gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-        gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
-        scene.add( gridDot );
-  }
+  // for (var i = 0; i < gridX; i++) {
+  //       var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
+  //       gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
+  //       gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
+  //       gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
+  //       scene.add( gridDot );
+  // }
+
+  //get api
+  (function() {
+    var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+    $.getJSON( flickerAPI, {
+      tags: "cat",
+      tagmode: "any",
+      format: "json"
+    })
+      .done(function( data ) {
+        $.each( data.items, function( i, item ) {
+          var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
+          gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
+          gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
+          gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
+
+          //label for the data (text next to each dot!)
+          var dataDiv = document.createElement( 'div' );
+  				dataDiv.className = 'label';
+  				dataDiv.textContent = 'entry';
+  				dataDiv.style.marginTop = '1em';
+          dataDiv.style.paddingLeft = '5em';
+  				var dataLabel = new THREE.CSS2DObject( dataDiv );
+  				dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
+  				scene.add( dataLabel );
+
+          scene.add( gridDot );
+          if ( i === 10 ) {
+            return false;
+          }
+        });
+      });
+  })();
 
   //post processing
   composer = new THREE.EffectComposer( renderer );
@@ -115,7 +149,8 @@ window.onload = function(){
   effect.uniforms[ 'amount' ].value = 0.0001;
   effect.renderToScreen = true;
   composer.addPass( effect );
-  //
+
+  //dynamic window resizing
   window.addEventListener( 'resize', onWindowResize, false );
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -124,15 +159,21 @@ window.onload = function(){
     composer.setSize( window.innerWidth, window.innerHeight );
   }
 
+  //cam and orbit initiate
   camera.position.set( 0, 20, 100 );
   controls.update();
 
   var animate = function () {
     requestAnimationFrame( animate );
+    //orbit controls
     controls.update();
-
+    //regular render
     renderer.render( scene, camera );
+    //compositing render
     composer.render();
+    //laber render
+    labelRenderer.render( scene, camera );
+
   };
 
   animate();
