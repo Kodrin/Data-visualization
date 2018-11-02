@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700" rel="stylesheet">
   <script src = "jquery/jquery-3.3.1.min.js"></script>
 
   <script src="lib/three.js"></script>
   <!-- <script src="lib/three.module.js"></script> -->
+  <script src="lib/renderers/CSS2DRenderer.js"></script>
   <script src="lib/OrbitControls.js"></script>
   <script src="lib/shaders/CopyShader.js"></script>
   <script src="lib/shaders/DotScreenShader.js"></script>
   <script src="lib/shaders/RGBShiftShader.js"></script>
+
 
   <script src="lib/postprocessing/EffectComposer.js"></script>
   <script src="lib/postprocessing/RenderPass.js"></script>
@@ -20,10 +21,13 @@
 
 <body>
 
+
   <div class="topLeft">top left</div>
   <div class="bottomLeft">bottom left</div>
   <div class="topRight">top left</div>
   <div class="bottomRight">bottom right</div>
+
+  <!-- <canvas id="canvas" height="128" width="128"></canvas> -->
   <script type = "text/javascript" src="js/base.js"></script>
 </body>
 </html>
