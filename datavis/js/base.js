@@ -76,7 +76,7 @@ window.onload = function(){
   scene.add(lineZ);
 
   //data points look
-  var gridDotGeo = new THREE.SphereGeometry( 0.8, 32, 32 );
+  var gridDotGeo = new THREE.SphereGeometry( 0.5, 32, 32 );
   var gridDotMat = new THREE.MeshBasicMaterial( { color: 0xffffff } )
 
   //defines the grid
@@ -125,8 +125,13 @@ window.onload = function(){
           var dataDiv = document.createElement( 'div' );
   				dataDiv.className = 'label';
   				dataDiv.textContent = 'entry';
-  				dataDiv.style.marginTop = '1em';
-          dataDiv.style.paddingLeft = '5em';
+          dataDiv.style.left = '2em';
+          dataDiv.style.top = '-1.6em';
+  				dataDiv.style.padding = '0';
+          dataDiv.style.margin = '0';
+          dataDiv.style.paddingLeft = '1em';
+          dataDiv.style.paddingBottom = '1.6em';
+          dataDiv.style.borderLeft = 'white solid 1.5px';
   				var dataLabel = new THREE.CSS2DObject( dataDiv );
   				dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
   				scene.add( dataLabel );

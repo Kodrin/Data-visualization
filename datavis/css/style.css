@@ -4,7 +4,7 @@ body{
   padding:0;
   overflow: hidden;
   font-family: 'Overpass Mono', monospace;
-  font-weight: 600; 
+  font-weight: 400;
   font-size:.8em;
 }
 
@@ -44,8 +44,13 @@ canvas {
  }
 
  .label{
-   color: #FFF;
-   font-family: monospace;
-   padding: 2px;
+   color: white;
    background: transparent;
+   opacity: 0;
+   transition: opacity .5s;
+ }
+
+ .label:hover{
+   opacity: 1;
+   transition: opacity .5s;
  }
