@@ -5,11 +5,32 @@ body{
   overflow: hidden;
   font-family: 'Overpass Mono', monospace;
   font-weight: 400;
-  font-size:.8em;
+  line-height:1.3;
 }
 
+p {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color:#8e8e8e;
+  transition:.5s;
+  z-index:100;
+}
+
+a:hover {
+  color:white;
+  transition:.5s;
+}
+
+
 .topLeft {
+  font-family: 'Overpass', monospace;
   position:fixed;
+  font-size:.85em;
   color: white;
   top:3%;
   left:2%;
@@ -17,21 +38,27 @@ body{
 
 .bottomLeft {
   position:fixed;
-  color: #aaa;
+  font-size:.7em;
+  color: #8e8e8e;
   bottom:3%;
   left:2%;
 }
 
 .topRight {
   position:fixed;
-  color: #aaa;
+  font-size:.7em;
+  color: #8e8e8e;
+  text-align: right;
   top:3%;
   right:2%;
+
 }
 
 .bottomRight {
   position:fixed;
+  font-size:.7em;
   color: #aaa;
+  text-align: right;
   bottom:3%;
   right:2%;
 }
@@ -45,6 +72,8 @@ canvas {
 
  .label{
    color: white;
+   font-size:.8em;
+   font-weight:300;
    background: transparent;
    opacity: 0;
    transition: opacity .5s;
@@ -54,3 +83,24 @@ canvas {
    opacity: 1;
    transition: opacity .5s;
  }
+
+/* LIST VIEW */
+.listview {
+  -webkit-column-count: 8; /* Chrome, Safari, Opera */
+  -moz-column-count: 8; /* Firefox */
+  column-count: 8;
+  font-size:.7em;
+  color: #8e8e8e;
+  position:fixed;
+  top: 140px;
+  left:2%;
+  right:2%;
+
+
+}
+
+.city {
+  border-top: 1px dotted #8e8e8e;
+  padding-top:5px;
+  padding-bottom:20px;
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700" rel="stylesheet">
   <script src = "jquery/jquery-3.3.1.min.js"></script>
 
@@ -13,22 +13,20 @@
   <script src="lib/shaders/DotScreenShader.js"></script>
   <script src="lib/shaders/RGBShiftShader.js"></script>
 
-
   <script src="lib/postprocessing/EffectComposer.js"></script>
   <script src="lib/postprocessing/RenderPass.js"></script>
   <script src="lib/postprocessing/ShaderPass.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body>
-
-
-  <div class="topLeft">snowfall in montreal <br> start — end</div>
-  <div class="topRight">top right</div>
-  <div class="bottomLeft">bottom left</div>
-  <div class="bottomRight">bottom right</div>
+<body onload="startTime()" onload="startDate()">
+  <div class="topLeft">WORLD WIND PATTERNS<div id="todaysdate"></div><div id="todaystime"></div></div>
+  <div class="topRight">DATASOURCE.COM<br>UPD-2018.11.13<br><br><a href="listview.html">LIST VIEW</a></div>
+  <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
+  <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
 
   <!-- <canvas id="canvas" height="128" width="128"></canvas> -->
+  <script type = "text/javascript" src="js/date.js"></script>
   <script type = "text/javascript" src="js/base.js"></script>
 </body>
 </html>
