@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Winds of the World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!--TEST-->
   <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700" rel="stylesheet">
   <script src = "jquery/jquery-3.3.1.min.js"></script>
@@ -21,13 +22,24 @@
 </head>
 
 <body onload="startTime()" onload="startDate()">
+  <script>document.body.className += 'fade-out';</script>
+  <script>$(function() {$('body').removeClass('fade-out');});</script>
+
   <div class="topLeft">WINDS OF THE WORLD<div id="todaysdate"></div><div id="todaystime"></div></div>
-  <div class="topRight">DATASOURCE.COM<br>UPD-2018.11.13<br><br><a href="listview.html">LIST VIEW</a></div>
+  <div class="topRight"><a>AIRVISUAL.COM</a><br><a href="listview.html">LIST VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
   <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
   <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
 
-  <!-- <canvas id="canvas" height="128" width="128"></canvas> -->
+<!-- SEARCH BAR -->
+  <div id="myNav" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlay-content">
+      <p>____________________________</p>
+    </div>
+  </div>
+
+  <script type = "text/javascript" src="js/search.js"></script>
   <script type = "text/javascript" src="js/date.js"></script>
-  <script type = "text/javascript" src="js/base.js"></script>
+  <!-- <script type = "text/javascript" src="js/base.js"></script> -->
 </body>
 </html>
