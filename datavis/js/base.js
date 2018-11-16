@@ -10,8 +10,8 @@ window.onload = function(){
   var gridZ = 100;
   var gridSpacing = 5;
 
-  var gridHelperSize = 50;
-  var gridHelperDivisions = 50;
+  var gridHelperSize = 100;
+  var gridHelperDivisions = 100;
 
   //Axis variables
   var axisBounds = 500;
@@ -107,43 +107,87 @@ window.onload = function(){
   // }
 
   //get api
-  (function() {
-    var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-    $.getJSON( flickerAPI, {
-      tags: "cat",
-      tagmode: "any",
-      format: "json"
-    })
-      .done(function( data ) {
-        $.each( data.items, function( i, item ) {
-          var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-          gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-          gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-          gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
+  // (function() {
+  //   var airQAPI = "nmscM5TEYNutrJ2LN";
+  //   var countryAirAPI = "" ;
+  //   var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  //   $.getJSON( countryAirAPI, {
+  //     tags: "country",
+  //     tagmode: "any",
+  //     format: "json"
+  //   })
+  //     .done(function( data ) {
+  //       $.each( data, function( i, item ) {
+  //         var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
+  //         gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
+  //         gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
+  //         gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
+  //
+  //         //label for the data (text next to each dot!)
+  //         var dataDiv = document.createElement( 'div' );
+  // 				dataDiv.className = 'label';
+  // 				dataDiv.textContent = 'entry';
+  //         dataDiv.style.left = '2em';
+  //         dataDiv.style.top = '-1.6em';
+  // 				dataDiv.style.padding = '0';
+  //         dataDiv.style.margin = '0';
+  //         dataDiv.style.paddingLeft = '1em';
+  //         dataDiv.style.paddingBottom = '1.6em';
+  //         dataDiv.style.borderLeft = 'white solid 1.5px';
+  // 				var dataLabel = new THREE.CSS2DObject( dataDiv );
+  // 				dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
+  // 				scene.add( dataLabel );
+  //
+  //         scene.add( gridDot );
+  //         if ( i === 10 ) {
+  //           return false;
+  //         }
+  //       });
+  //     });
+  // })();
 
-          //label for the data (text next to each dot!)
-          var dataDiv = document.createElement( 'div' );
-  				dataDiv.className = 'label';
-  				dataDiv.textContent = 'entry';
-          dataDiv.style.left = '2em';
-          dataDiv.style.top = '-1.6em';
-  				dataDiv.style.padding = '0';
-          dataDiv.style.margin = '0';
-          dataDiv.style.paddingLeft = '1em';
-          dataDiv.style.paddingBottom = '1.6em';
-          dataDiv.style.borderLeft = 'white solid 1.5px';
-  				var dataLabel = new THREE.CSS2DObject( dataDiv );
-  				dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
-  				scene.add( dataLabel );
+  $.getJSON( "http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN", function( data ) {
+    var items = [];
+    $.each( data, function( i, val ) {
+      console.log(data.data);
+      for (var i = 0; i < data.data.length; i++) {
+  // 
+  // $.getJSON( "api.openweathermap.org/data/2.5/weather?q={city name}" , function( data ) {
+  //         });
+      var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
+      gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
+      gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
+      gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
 
-          scene.add( gridDot );
-          if ( i === 10 ) {
-            return false;
-          }
-        });
-      });
-  })();
+      //label for the data (text next to each dot!)
+      var dataDiv = document.createElement( 'div' );
+      dataDiv.className = 'label';
+      dataDiv.textContent =  data.data[i].country;
+      dataDiv.style.left = '2em';
+      dataDiv.style.top = '-1.6em';
+      dataDiv.style.padding = '0';
+      dataDiv.style.margin = '0';
+      dataDiv.style.paddingLeft = '1em';
+      dataDiv.style.paddingBottom = '1.6em';
+      dataDiv.style.borderLeft = 'white solid 1.5px';
+      var dataLabel = new THREE.CSS2DObject( dataDiv );
+      dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
 
+      //
+
+      //appending datatodiv
+      let listView = $("<li>");
+      $(listView).text(data.data[i].country);
+      // $(listView).appendTo(".topLeft");
+
+      scene.add( dataLabel );
+
+      scene.add( gridDot );
+    }
+
+    });
+
+  });
   //post processing
   composer = new THREE.EffectComposer( renderer );
   composer.addPass( new THREE.RenderPass( scene, camera ) );
