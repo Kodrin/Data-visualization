@@ -1,11 +1,20 @@
+html {
+    background-color: black;
+}
+
 body{
-  background:black;
   margin:0;
   padding:0;
-  overflow: hidden;
   font-family: 'Overpass Mono', monospace;
   font-weight: 400;
   line-height:1.3;
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+body.fade-out {
+    opacity: 0;
+    transition: none;
 }
 
 p {
@@ -19,6 +28,7 @@ a {
   color:#8e8e8e;
   transition:.5s;
   z-index:100;
+  cursor:pointer;
 }
 
 a:hover {
@@ -26,11 +36,15 @@ a:hover {
   transition:.5s;
 }
 
+::selection {
+  color:#555555;
+
+}
 
 .topLeft {
   font-family: 'Overpass', monospace;
   position:fixed;
-  font-size:.85em;
+  font-size:.9em;
   color: white;
   top:3%;
   left:2%;
@@ -38,7 +52,7 @@ a:hover {
 
 .bottomLeft {
   position:fixed;
-  font-size:.7em;
+  font-size:.75em;
   font-weight: 300;
   color: #8e8e8e;
   bottom:3%;
@@ -47,7 +61,7 @@ a:hover {
 
 .topRight {
   position:fixed;
-  font-size:.7em;
+  font-size:.75em;
   color: #8e8e8e;
   text-align: right;
   top:3%;
@@ -57,7 +71,7 @@ a:hover {
 
 .bottomRight {
   position:fixed;
-  font-size:.7em;
+  font-size:.75em;
   color: #8e8e8e;
   text-align: right;
   bottom:3%;
@@ -84,6 +98,52 @@ canvas {
    opacity: 1;
    transition: opacity .5s;
  }
+
+ /* DROP DOWN */
+ .overlay {
+     height: 100%;
+     width: 100%;
+     display: none;
+     position: fixed;
+     z-index: 1;
+     top: 0;
+     left: 0;
+     right:0;
+     bottom:0;
+     background-color: rgb(0,0,0);
+     background-color: rgba(0,0,0, 0.8);
+ }
+
+ .overlay-content {
+     color:#aaa;
+     position: relative;
+     top: 40%;
+     width: 100%;
+     text-align: center;
+ }
+
+ .overlay a {
+     color:#aaa;
+     padding: 8px;
+     text-decoration: none;
+     font-size: 1em;
+     display: block;
+     transition: 0.3s;
+ }
+
+ .overlay a:hover, .overlay a:focus {
+     color: white;
+ }
+
+ .overlay .closebtn {
+     margin:0;
+     padding:0;
+     font-size: 40px;
+     position: fixed;
+     top: 3%;
+     right: 2%;
+ }
+
 
 /* LIST VIEW */
 .listview {
