@@ -1,5 +1,6 @@
 html {
     background-color: black;
+    overflow: hidden;
 }
 
 body{
@@ -90,7 +91,7 @@ canvas {
    font-size:.8em;
    font-weight:300;
    background: transparent;
-   opacity: 0;
+   /* opacity: 0; */
    transition: opacity .5s;
  }
 

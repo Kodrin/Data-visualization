@@ -13,6 +13,9 @@ window.onload = function(){
   var gridHelperSize = 100;
   var gridHelperDivisions = 100;
 
+  //array to hold objects
+  var myDataDots = [];
+
   //Axis variables
   var axisBounds = 500;
 
@@ -22,10 +25,16 @@ window.onload = function(){
   //labels
   var labelRenderer;
 
+
+  var mouse = new THREE.Vector2(), INTERSECTED;
+  var radius = 100, theta = 0;
+
   //three.js essemtials
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var controls = new THREE.OrbitControls( camera );
+  var raycaster = new THREE.Raycaster();
+  var stats = new Stats();
   var renderer = new THREE.WebGLRenderer();
   //set pixel ratio
   renderer.setPixelRatio( window.devicePixelRatio );
@@ -37,6 +46,7 @@ window.onload = function(){
   labelRenderer.domElement.style.position = 'absolute';
   labelRenderer.domElement.style.top = 0;
   document.body.appendChild( labelRenderer.domElement );
+  document.body.appendChild( stats.dom );
 
 
   //sample cube from example
@@ -44,6 +54,13 @@ window.onload = function(){
   var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
   var cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
+
+  //interaction sphereInter
+  var sphereInterGeo = new THREE.SphereBufferGeometry( 5 );
+  var sphereInterMat = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+  sphereInter = new THREE.Mesh( sphereInterGeo, sphereInterMat );
+  sphereInter.visible = false;
+  scene.add( sphereInter );
 
   //environment limits
   var lineMat = new THREE.LineBasicMaterial( { color: 0xff0000 } );
@@ -97,92 +114,21 @@ window.onload = function(){
         scene.add( gridDot );
   }
 
-  //data point
-  // for (var i = 0; i < gridX; i++) {
-  //       var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-  //       gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-  //       gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-  //       gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
-  //       scene.add( gridDot );
-  // }
-
-  //get api
-  // (function() {
-  //   var airQAPI = "nmscM5TEYNutrJ2LN";
-  //   var countryAirAPI = "" ;
-  //   var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
-  //   $.getJSON( countryAirAPI, {
-  //     tags: "country",
-  //     tagmode: "any",
-  //     format: "json"
-  //   })
-  //     .done(function( data ) {
-  //       $.each( data, function( i, item ) {
-  //         var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-  //         gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-  //         gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-  //         gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
-  //
-  //         //label for the data (text next to each dot!)
-  //         var dataDiv = document.createElement( 'div' );
-  // 				dataDiv.className = 'label';
-  // 				dataDiv.textContent = 'entry';
-  //         dataDiv.style.left = '2em';
-  //         dataDiv.style.top = '-1.6em';
-  // 				dataDiv.style.padding = '0';
-  //         dataDiv.style.margin = '0';
-  //         dataDiv.style.paddingLeft = '1em';
-  //         dataDiv.style.paddingBottom = '1.6em';
-  //         dataDiv.style.borderLeft = 'white solid 1.5px';
-  // 				var dataLabel = new THREE.CSS2DObject( dataDiv );
-  // 				dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
-  // 				scene.add( dataLabel );
-  //
-  //         scene.add( gridDot );
-  //         if ( i === 10 ) {
-  //           return false;
-  //         }
-  //       });
-  //     });
-  // })();
 
   $.getJSON( "http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN", function( data ) {
     var items = [];
     $.each( data, function( i, val ) {
       console.log(data.data);
       for (var i = 0; i < data.data.length; i++) {
-  // 
-  // $.getJSON( "api.openweathermap.org/data/2.5/weather?q={city name}" , function( data ) {
-  //         });
-      var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-      gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-      gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-      gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
 
-      //label for the data (text next to each dot!)
-      var dataDiv = document.createElement( 'div' );
-      dataDiv.className = 'label';
-      dataDiv.textContent =  data.data[i].country;
-      dataDiv.style.left = '2em';
-      dataDiv.style.top = '-1.6em';
-      dataDiv.style.padding = '0';
-      dataDiv.style.margin = '0';
-      dataDiv.style.paddingLeft = '1em';
-      dataDiv.style.paddingBottom = '1.6em';
-      dataDiv.style.borderLeft = 'white solid 1.5px';
-      var dataLabel = new THREE.CSS2DObject( dataDiv );
-      dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
-
-      //
+      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,1));
+      myDataDots[i].render(scene);
+      myDataDots[i].text(data.data[i].country,scene);
 
       //appending datatodiv
       let listView = $("<li>");
       $(listView).text(data.data[i].country);
-      // $(listView).appendTo(".topLeft");
 
-      scene.add( dataLabel );
-
-      scene.add( gridDot );
     }
 
     });
@@ -199,6 +145,7 @@ window.onload = function(){
   effect.renderToScreen = true;
   composer.addPass( effect );
 
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   //dynamic window resizing
   window.addEventListener( 'resize', onWindowResize, false );
   function onWindowResize() {
@@ -206,6 +153,15 @@ window.onload = function(){
     camera.updateProjectionMatrix();
     renderer.setSize( window.innerWidth, window.innerHeight );
     composer.setSize( window.innerWidth, window.innerHeight );
+  }
+
+  function onDocumentMouseMove( event ) {
+
+    event.preventDefault();
+
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
   }
 
   //cam and orbit initiate
@@ -216,6 +172,10 @@ window.onload = function(){
     requestAnimationFrame( animate );
     //orbit controls
     controls.update();
+    //render function
+    interaction();
+    //update stats
+    stats.update();
     //regular render
     renderer.render( scene, camera );
     //compositing render
@@ -224,6 +184,31 @@ window.onload = function(){
     labelRenderer.render( scene, camera );
 
   };
+
+  function interaction() {
+
+    // find intersections
+    // camera.updateMatrixWorld();
+    //
+    // raycaster.setFromCamera( mouse, camera );
+    //
+    // var intersects = raycaster.intersectObjects( scene.children );
+    //
+    // if ( intersects.length > 0 ) {
+    //
+    //   if ( INTERSECTED != intersects[ 0 ].object ) {
+    //     if ( INTERSECTED ) INTERSECTED.material.setHex( INTERSECTED.currentHex );
+    //     INTERSECTED = intersects[ 0 ].object;
+    //     INTERSECTED.currentHex = INTERSECTED.material.getHex();
+    //     INTERSECTED.material.setHex( 0xff0000 );
+    //   }
+    // } else {
+    //   if ( INTERSECTED ) INTERSECTED.material.setHex( INTERSECTED.currentHex );
+    //   INTERSECTED = null;
+    // }
+
+
+  }
 
   animate();
   // renderer.render( scene, camera );
