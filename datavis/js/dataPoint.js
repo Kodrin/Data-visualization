@@ -1,4 +1,4 @@
-function myDataPoints(x,y,z,r,v){
+function myDataPoints(x,y,z,r,v,t){
   //data points look
   var gridDotGeo = new THREE.SphereGeometry( r, 32, 32 );
   var gridDotMat = new THREE.MeshBasicMaterial( { color: 0xffffff } )
@@ -9,16 +9,18 @@ function myDataPoints(x,y,z,r,v){
   datapoint.position.y = y;
   datapoint.position.z = z;
   datapoint.v = v;
+  datapoint.t = t;
 //member function
   this.animate =function(){
-
+    datapoint.position.x +=  v;
+    datapoint.rotation.x +=  t;
   }
 
 
   this.text =function(title,scene){
     var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
-    dataDiv.textContent =  title;
+    dataDiv.textContent =  title + x + y;
     dataDiv.style.left = '2em';
     dataDiv.style.top = '-1.6em';
     dataDiv.style.padding = '0';

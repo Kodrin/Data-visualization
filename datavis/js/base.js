@@ -121,7 +121,7 @@ window.onload = function(){
       console.log(data.data);
       for (var i = 0; i < data.data.length; i++) {
 
-      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,1));
+      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.01,0.01));
       myDataDots[i].render(scene);
       myDataDots[i].text(data.data[i].country,scene);
 
@@ -168,7 +168,7 @@ window.onload = function(){
   camera.position.set( 0, 20, 100 );
   controls.update();
 
-  var animate = function () {
+  function animate() {
     requestAnimationFrame( animate );
     //orbit controls
     controls.update();
@@ -183,6 +183,10 @@ window.onload = function(){
     //laber render
     labelRenderer.render( scene, camera );
 
+    for (var i = 0; i < myDataDots.length; i++) {
+      myDataDots[i].animate();
+
+    }
   };
 
   function interaction() {
