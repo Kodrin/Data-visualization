@@ -1,8 +1,14 @@
 window.onload = function(){
-  // let canvas = document.getElementById("canvas");
+  //size of canvas
+  // var dimension = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+  // var c = document.getElementById("canvas");
+  // c.width = dimension[0];
+  // c.height = dimension[1];
+  //
+  let canvas = document.getElementById("canvas");
 
   //get the context
-  // let context = canvas.getContext("2d");
+  let context = canvas.getContext("2d");
 
   //grid var
   var gridX = 100;
@@ -24,24 +30,30 @@ window.onload = function(){
 
   //three.js essemtials
   var scene = new THREE.Scene();
+  // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var controls = new THREE.OrbitControls( camera );
   var renderer = new THREE.WebGLRenderer();
   //set pixel ratio
   renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  // renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
+
   document.body.appendChild( renderer.domElement );
   //initialize the 2D renderer for UI
   labelRenderer = new THREE.CSS2DRenderer();
-  labelRenderer.setSize( window.innerWidth, window.innerHeight );
-  labelRenderer.domElement.style.position = 'absolute';
-  labelRenderer.domElement.style.top = 0;
+  // labelRenderer.setSize( window.innerWidth, window.innerHeight );
+  labelRenderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
+
+  // labelRenderer.domElement.style.position = 'absolute';
+  // labelRenderer.domElement.style.top = 0;
+  // labelRenderer.domElement.style.zIndex = -10; // TEST
   document.body.appendChild( labelRenderer.domElement );
 
 
   //sample cube from example
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-  var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
   var cube = new THREE.Mesh( geometry, material );
   scene.add( cube );
 
@@ -51,7 +63,7 @@ window.onload = function(){
   var envWire = new THREE.WireframeGeometry( envGeo );
   var envLine = new THREE.LineSegments( envWire );
   envLine.material.depthTest = false;
-  envLine.material.opacity = 0.25;
+  envLine.material.opacity = 0.15;
   envLine.material.transparent = true;
 
   //environment axis
@@ -151,7 +163,7 @@ window.onload = function(){
     $.each( data, function( i, val ) {
       console.log(data.data);
       for (var i = 0; i < data.data.length; i++) {
-  // 
+  //
   // $.getJSON( "api.openweathermap.org/data/2.5/weather?q={city name}" , function( data ) {
   //         });
       var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
@@ -163,13 +175,7 @@ window.onload = function(){
       var dataDiv = document.createElement( 'div' );
       dataDiv.className = 'label';
       dataDiv.textContent =  data.data[i].country;
-      dataDiv.style.left = '2em';
-      dataDiv.style.top = '-1.6em';
-      dataDiv.style.padding = '0';
-      dataDiv.style.margin = '0';
-      dataDiv.style.paddingLeft = '1em';
-      dataDiv.style.paddingBottom = '1.6em';
-      dataDiv.style.borderLeft = 'white solid 1.5px';
+      /* MOVED STYLING INTO CSS */
       var dataLabel = new THREE.CSS2DObject( dataDiv );
       dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
 
@@ -202,13 +208,19 @@ window.onload = function(){
   //dynamic window resizing
   window.addEventListener( 'resize', onWindowResize, false );
   function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    // camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = document.documentElement.clientWidth / document.documentElement.clientHeight;
+
     camera.updateProjectionMatrix();
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    composer.setSize( window.innerWidth, window.innerHeight );
+    // renderer.setSize( window.innerWidth, window.innerHeight );
+    // composer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
+    composer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
+
   }
 
   //cam and orbit initiate
+  //x y z
   camera.position.set( 0, 20, 100 );
   controls.update();
 

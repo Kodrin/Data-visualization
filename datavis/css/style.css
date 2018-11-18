@@ -1,5 +1,6 @@
 html {
     background-color: black;
+    overflow:hidden;
 }
 
 body{
@@ -15,6 +16,13 @@ body{
 body.fade-out {
     opacity: 0;
     transition: none;
+}
+
+#canvas {
+    position:absolute;
+    width:100%;
+    height:auto;
+    top:0;
 }
 
 p {
@@ -78,20 +86,25 @@ a:hover {
   right:2%;
 }
 
-canvas {
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: transparent;
- }
-
  .label{
    color: white;
    font-size:.8em;
    font-weight:300;
+   line-height: 1.2;
    background: transparent;
    opacity: 0;
    transition: opacity .5s;
+   left: 0;
+   top: 0;
+   padding: 0;
+   margin: 0;
+   width:200px;
+   border-left: white solid 1.5px;
+   text-align: left;
+   padding-left: 8px;
+   padding-bottom: 40px;
+   margin-top: -30px;
+   margin-left: 103px;
  }
 
  .label:hover{
