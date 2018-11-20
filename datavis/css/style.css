@@ -23,6 +23,7 @@ body.fade-out {
     width:100%;
     height:auto;
     top:0;
+    z-index:-1;
 }
 
 p {
@@ -92,19 +93,17 @@ a:hover {
    font-weight:300;
    line-height: 1.2;
    background: transparent;
-   opacity: 0;
+   opacity: .2;
    transition: opacity .5s;
    left: 0;
    top: 0;
    padding: 0;
    margin: 0;
-   width:200px;
    border-left: white solid 1.5px;
    text-align: left;
    padding-left: 8px;
    padding-bottom: 40px;
-   margin-top: -30px;
-   margin-left: 103px;
+   margin-top: -24px;
  }
 
  .label:hover{
@@ -163,22 +162,22 @@ a:hover {
   -webkit-column-count: 8; /* Chrome, Safari, Opera */
   -moz-column-count: 8; /* Firefox */
   column-count: 8;
-  font-size:.7em;
-  color: #8e8e8e;
   position:fixed;
   top: 140px;
   left:2%;
   right:2%;
 }
 
-.city {
+#city {
   border-top: 1px dotted #8e8e8e;
   padding-top:5px;
   padding-bottom:20px;
+  color: #8e8e8e;
+  font-size:.7em;
 }
 
-/* HOME PAGE - PHONES */
-@media only screen and (max-width: 768px) {
+/* MOBILE */
+@media (max-width: 768px) {
   .topLeft {
     top:2%;
     left:2%;
@@ -199,7 +198,18 @@ a:hover {
 
   .bottomRight {
     font-size:.9em;
-    top:2%;
+    bottom:2%;
+    right:2%;
+  }
+
+  /* LIST VIEW */
+  .listview {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+    font-size:.9em;
+    top: 140px;
+    left:2%;
     right:2%;
   }
 }

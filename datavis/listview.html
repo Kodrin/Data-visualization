@@ -7,15 +7,16 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body onload="startTime()" onload="startDate()">
+<body onload="startTime()" onload="startDate()" onload="list()">
   <div class="bgLoadIn"> </div>
   <div class="topLeft">WINDS OF THE WORLD<div id="todaysdate"></div><div id="todaystime"></div></div>
-  <div class="topRight"><a>AIRVISUAL.COM</a><br><a href="index.html">VISUAL VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
+  <div class="topRight"><a href="index.html">VISUAL VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
 
   <div class="listview">
-    <div class="city">PLACEHOLDER<br>00/HR</div>
+    <div id="city"></div>
+    <!-- <div class="city">PLACEHOLDER<br>00/HR</div> -->
   </div>
-
+  <script type = "text/javascript" src="js/list.js"></script>
   <script type = "text/javascript" src="js/search.js"></script>
   <script type = "text/javascript" src="js/date.js"></script>
 </body>

@@ -177,9 +177,13 @@ window.onload = function(){
       dataDiv.textContent =  data.data[i].country;
       /* MOVED STYLING INTO CSS */
       var dataLabel = new THREE.CSS2DObject( dataDiv );
-      dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
+      //get width of each div
+      // var labelWidth = document.getElementsByClassName('label').offsetWidth;
+      var labelWidth = dataDiv.offsetWidth / 2;
+      var xPos = labelWidth + gridDot.position.x;
+      // dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
+      dataLabel.position.set( xPos, gridDot.position.y, gridDot.position.z );
 
-      //
 
       //appending datatodiv
       let listView = $("<li>");
