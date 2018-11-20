@@ -1,5 +1,10 @@
-window.onload = function list() {
-  //label for the data, list viewport
-  var city = ["test1", "test2", "test3"];
-  document.getElementById("city").innerHTML = city;
+function generateListView(){
+  console.log(countryNames);
+  for(let i =0; i<countryNames.length; i++ ){
+    let divCity = document.createElement("div");
+    divCity.className = "city";
+    divCity.textContent = countryNames[i].countryname;
+    document.getElementsByClassName("listContainer")[0].appendChild(divCity);
+  }
+  // document.getElementById("listview").style.overflowY = "scroll";
 }

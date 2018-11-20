@@ -1,9 +1,9 @@
-// GET THE DATE
-// GET THE TIME
 function startTime() {
+    // GET THE DATE
     var utc = new Date().toJSON().slice(0,10).replace(/-/g,'.');
     document.getElementById('todaysdate').innerHTML = "D-" + utc;
 
+    // GET THE TIME
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();

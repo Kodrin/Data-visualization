@@ -1,3 +1,4 @@
+
 window.onload = function(){
   //size of canvas
   // var dimension = [document.documentElement.clientWidth, document.documentElement.clientHeight];
@@ -9,6 +10,9 @@ window.onload = function(){
 
   //get the context
   let context = canvas.getContext("2d");
+
+
+  startTime();
 
   //grid var
   var gridX = 100;
@@ -39,17 +43,18 @@ window.onload = function(){
   // renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
 
-  document.body.appendChild( renderer.domElement );
+  //document.body.appendChild( renderer.domElement );
+  document.getElementById("visualView").appendChild(renderer.domElement);
   //initialize the 2D renderer for UI
   labelRenderer = new THREE.CSS2DRenderer();
   // labelRenderer.setSize( window.innerWidth, window.innerHeight );
   labelRenderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
 
-  // labelRenderer.domElement.style.position = 'absolute';
-  // labelRenderer.domElement.style.top = 0;
-  // labelRenderer.domElement.style.zIndex = -10; // TEST
-  document.body.appendChild( labelRenderer.domElement );
-
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = 0;
+  labelRenderer.domElement.style.zIndex = 0;
+  //  document.body.appendChild( labelRenderer.domElement );
+  document.getElementById("visualView").appendChild(labelRenderer.domElement);
 
   //sample cube from example
   var geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -161,7 +166,6 @@ window.onload = function(){
   $.getJSON( "http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN", function( data ) {
     var items = [];
     $.each( data, function( i, val ) {
-      console.log(data.data);
       for (var i = 0; i < data.data.length; i++) {
   //
   // $.getJSON( "api.openweathermap.org/data/2.5/weather?q={city name}" , function( data ) {
@@ -175,15 +179,17 @@ window.onload = function(){
       var dataDiv = document.createElement( 'div' );
       dataDiv.className = 'label';
       dataDiv.textContent =  data.data[i].country;
-      /* MOVED STYLING INTO CSS */
+      let customObject ={
+        "countryname":data.data[i].country
+      }
+      countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA
+      // document.getElementsByClassName("topLeft")[0].appendChild(dataDiv);
       var dataLabel = new THREE.CSS2DObject( dataDiv );
-      //get width of each div
-      // var labelWidth = document.getElementsByClassName('label').offsetWidth;
-      var labelWidth = dataDiv.offsetWidth / 2;
-      var xPos = labelWidth + gridDot.position.x;
-      // dataLabel.position.set( gridDot.position.x, gridDot.position.y, gridDot.position.z );
-      dataLabel.position.set( xPos, gridDot.position.y, gridDot.position.z );
-
+      var widthTest = data.data[i].country.length*8;
+      dataLabel.element.style.width = widthTest +"px";
+      dataLabel.element.style.left = widthTest/2.3 +"px";
+      var xPos = gridDot.position.x;
+      dataLabel.position.set(xPos, gridDot.position.y, gridDot.position.z );
 
       //appending datatodiv
       let listView = $("<li>");
@@ -242,6 +248,7 @@ window.onload = function(){
   };
 
   animate();
+
   // renderer.render( scene, camera );
 
 }

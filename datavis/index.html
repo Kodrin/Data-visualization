@@ -21,27 +21,40 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body onload="startTime()" onload="startDate()">
-  <script>document.body.className += 'fade-out';</script>
-  <script>$(function() {$('body').removeClass('fade-out');});</script>
+<body>
+<div class="topLeft">WINDS OF THE WORLD<div id="todaysdate"></div><div id="todaystime"></div></div>
 
-  <div class="topLeft">WINDS OF THE WORLD<div id="todaysdate"></div><div id="todaystime"></div></div>
-  <div class="topRight"><a href="listview.html">LIST VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
-  <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
-  <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
+<!-- THE VISUAL VIEW  -->
+<div id="visualView">
+    <!-- <script>document.body.className += 'fade-out';</script>
+    <script>$(function() {$('body').removeClass('fade-out');});</script> -->
 
-<!-- SEARCH BAR -->
-  <div id="myNav" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="overlay-content">
-      <p>____________________________</p>
+    <div class="topRight"><a id = "switchToList" href="#">LIST VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
+    <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
+    <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
+
+  <!-- SEARCH BAR -->
+    <div id="myNav" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <div class="overlay-content">
+        <p>____________________________</p>
+      </div>
     </div>
-  </div>
+    <canvas id="canvas">error</canvas>
+</div>
+
+<!-- THE LIST VIEW -->
+<div id="listView">
+  <div class="topRight"><a id = "switchToView" href="#">VISUAL VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
+    <div class="listContainer"></div>
+</div>
 
   <!-- SCRIPTS -->
-  <canvas id="canvas">error</canvas>
-  <script type = "text/javascript" src="js/base.js"></script>
   <script type = "text/javascript" src="js/search.js"></script>
   <script type = "text/javascript" src="js/date.js"></script>
+  <script type = "text/javascript" src="js/base.js"></script>
+  <script type = "text/javascript" src="js/list.js"></script>
+  <script type = "text/javascript" src="js/sharedVariable.js"></script>
+  <script type = "text/javascript" src="js/switchViews.js"></script>
 </body>
 </html>
