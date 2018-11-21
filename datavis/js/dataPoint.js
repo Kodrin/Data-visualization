@@ -22,7 +22,11 @@ function myDataPoints(x,y,z,r,v,t){
   datapoint.t = t;
 
   //trailLine
-  this.startPosition = new THREE.Vector3().copy(position)
+  this.startPosition = new THREE.Vector3().copy(position);
+  this.position = new THREE.Vector3().copy(this.startPosition)
+  this.lineMaterial = new THREE.LineBasicMaterial({color: 0xffffff, transparent: false});
+  const geometry = new THREE.Geometry();
+  this.trailLine = new THREE.Line(geometry, this.lineMaterial);
 
   //member function
   this.animate =function(){
@@ -33,21 +37,25 @@ function myDataPoints(x,y,z,r,v,t){
     dataLabel.position.x = datapoint.position.x;
     dataLabel.position.y = datapoint.position.y;
     dataLabel.position.z = datapoint.position.z;
+
+    position.x = x;
+    position.y = y;
+    position.z = z;
   }
 
 
     this.initTrail=function (scene) {
     this.trail = true;
 
-    this.positionsCount = 100;
+    this.positionsCount = 10000;
     this.oldPositions = [];
     for (let i = 0; i < this.positionsCount; i++) {
       this.oldPositions[i] = this.startPosition.clone();
     }
 
-    const geometry = new THREE.Geometry();
+    // const geometry = new THREE.Geometry();
     geometry.vertices = this.oldPositions;
-    this.trailLine = new THREE.Line(geometry, this.lineMaterial);
+    // this.trailLine = new THREE.Line(geometry, this.lineMaterial);
 
     scene.add(this.trailLine);
 
@@ -62,7 +70,7 @@ function myDataPoints(x,y,z,r,v,t){
   }
 
   this.updateTrail=function () {
-    this.trailLine.geometry.vertices.push(this.position);
+    this.trailLine.geometry.vertices.push(this.position.clone());
     this.trailLine.geometry.vertices.shift();
     this.trailLine.geometry.verticesNeedUpdate = true;
   }
