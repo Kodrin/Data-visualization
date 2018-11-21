@@ -125,6 +125,9 @@ window.onload = function(){
       myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.01,0.01));
       myDataDots[i].render(scene);
       myDataDots[i].text(data.data[i].country,scene);
+      myDataDots[i].initTrail(scene);
+            // myDataDots[i].updateTrail();
+
 
       let customObject ={
         "countryname":data.data[i].country
@@ -182,6 +185,7 @@ window.onload = function(){
     //animate each data point in the array
     for (var i = 0; i < myDataDots.length; i++) {
       myDataDots[i].animate();
+      // myDataDots[i].updateTrail();
     }
 
   };
