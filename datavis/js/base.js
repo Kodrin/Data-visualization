@@ -11,7 +11,6 @@ window.onload = function(){
   //get the context
   let context = canvas.getContext("2d");
 
-
   startTime();
 
   //grid var
