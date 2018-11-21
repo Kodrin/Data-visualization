@@ -22,6 +22,9 @@ window.onload = function(){
   var gridHelperSize = 100;
   var gridHelperDivisions = 100;
 
+  //array to hold objects
+  var myDataDots = [];
+
   //Axis variables
   var axisBounds = 500;
 
@@ -113,42 +116,24 @@ window.onload = function(){
         scene.add( gridDot );
   }
 
+  //get api for each country name and assign a data point based on dataPOint.js construct
   $.getJSON( "http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN", function( data ) {
     var items = [];
     $.each( data, function( i, val ) {
       for (var i = 0; i < data.data.length; i++) {
-  //
-  // $.getJSON( "api.openweathermap.org/data/2.5/weather?q={city name}" , function( data ) {
-  //         });
-      var gridDot = new THREE.Mesh (gridDotGeo, gridDotMat);
-      gridDot.position.x = Math.random() * gridHelperSize -gridHelperSize/2;
-      gridDot.position.y = Math.random() * gridHelperSize -gridHelperSize/2;
-      gridDot.position.z = Math.random() * gridHelperSize -gridHelperSize/2;
 
-      //label for the data (text next to each dot!)
-      var dataDiv = document.createElement( 'div' );
-      dataDiv.className = 'label';
-      dataDiv.textContent =  data.data[i].country;
+      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.01,0.01));
+      myDataDots[i].render(scene);
+      myDataDots[i].text(data.data[i].country,scene);
+
       let customObject ={
         "countryname":data.data[i].country
       }
       countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA
-      // document.getElementsByClassName("topLeft")[0].appendChild(dataDiv);
-      var dataLabel = new THREE.CSS2DObject( dataDiv );
-      var widthTest = data.data[i].country.length*8;
-      dataLabel.element.style.width = widthTest +"px";
-      dataLabel.element.style.left = widthTest/2.3 +"px";
-      var xPos = gridDot.position.x;
-      dataLabel.position.set(xPos, gridDot.position.y, gridDot.position.z );
 
       //appending datatodiv
       let listView = $("<li>");
       $(listView).text(data.data[i].country);
-      // $(listView).appendTo(".topLeft");
-
-      scene.add( dataLabel );
-
-      scene.add( gridDot );
     }
 
     });
@@ -194,6 +179,10 @@ window.onload = function(){
     composer.render();
     //laber render
     labelRenderer.render( scene, camera );
+    //animate each data point in the array
+    for (var i = 0; i < myDataDots.length; i++) {
+      myDataDots[i].animate();
+    }
 
   };
 
