@@ -102,9 +102,12 @@ function myDataPoints(x,y,z,r,v,t){
 
 
   this.text =function(title,wind,temperature,scene){
+    var br = document.createElement('br');
     // var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
-    dataDiv.textContent =  title + "---" + "Wind Speed:" + wind +"  " + "Temp:" + temperature;
+    dataDiv.textContent =  title + "/" + "WIND SPEED " + wind  +"/" + "TEMPERATURE " + temperature;
+    dataDiv.appendChild(br);
+    // dataDiv.textContent.append =  "moretext";
     dataDiv.style.left = '2em';
     dataDiv.style.top = '-1.6em';
     dataDiv.style.padding = '0';
