@@ -135,7 +135,7 @@ a:hover {
    font-weight:300;
    line-height: 1.2;
    background: transparent;
-   opacity: 0;
+   /* opacity: 0; */
    transition: opacity .5s;
    left: 0;
    top: 0;

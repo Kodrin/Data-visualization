@@ -117,27 +117,32 @@ window.onload = function(){
   }
 
   //get api for each country name and assign a data point based on dataPOint.js construct
-  $.getJSON( "http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN", function( data ) {
+  // http://api.airvisual.com/v2/countries?key=nmscM5TEYNutrJ2LN
+  //weatherbit api = 8f5319982b934d1e8bca2839ce4a722f
+  $.getJSON( "js/weather_file.json", function( data ) {
     var items = [];
+    // console.log(data);
     $.each( data, function( i, val ) {
-      for (var i = 0; i < data.data.length; i++) {
+      // console.log(data.wind);
+      for (var i = 0; i < 10; i++) {
 
       myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.1,0.01));
       myDataDots[i].render(scene);
-      myDataDots[i].text(data.data[i].country,scene);
-      myDataDots[i].initTrail(scene);
+      myDataDots[i].text(data[i].city.findname,data[i].wind.speed,data[i].main.temp,scene);
+      // myDataDots[i].initTrail(scene);
             // myDataDots[i].updateTrail();
 
 
       let customObject ={
-        "countryname":data.data[i].country
+        "countryname":data[i].city.findname
       }
       countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA
 
       //appending datatodiv
       let listView = $("<li>");
-      $(listView).text(data.data[i].country);
+      $(listView).text(data[i].city.findname);
     }
+
 
     });
 
@@ -185,7 +190,7 @@ window.onload = function(){
     //animate each data point in the array
     for (var i = 0; i < myDataDots.length; i++) {
       myDataDots[i].animate();
-      myDataDots[i].updateTrail();
+      // myDataDots[i].updateTrail();
     }
 
   };

@@ -12,6 +12,10 @@ function myDataPoints(x,y,z,r,v,t){
   var datapoint = new THREE.Mesh (gridDotGeo, gridDotMat);
   var dataLabel = new THREE.CSS2DObject( dataDiv );
 
+  //position information
+  var xPosInfo;
+  var yPosInfo;
+
   datapoint.position.x = x;
   datapoint.position.y = y;
   datapoint.position.z = z;
@@ -30,8 +34,19 @@ function myDataPoints(x,y,z,r,v,t){
 
   //member function
   this.animate =function(){
-    datapoint.position.x +=  v;
-    datapoint.rotation.x +=  t;
+    // datapoint.position.x +=  v;
+    // datapoint.rotation.x +=  t;
+
+    datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
+    datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
+    if (datapoint.position.x > 100) {
+      datapoint.position.x +=  Math.sin(datapoint.position.y + Math.PI/2) * v *2;
+      datapoint.position.z +=  -Math.cos(datapoint.position.y + Math.PI/2) * v *2;
+      datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
+      datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
+    }
+
+    // datapoint.rotation.x +=  t;
 
     //update the labels
     dataLabel.position.x = datapoint.position.x;
@@ -41,6 +56,9 @@ function myDataPoints(x,y,z,r,v,t){
     position.x = x;
     position.y = y;
     position.z = z;
+
+    var xPosInfo = Math.round(position.x);
+    var yPosInfo = Math.round(position.y);
   }
 
 
@@ -83,10 +101,10 @@ function myDataPoints(x,y,z,r,v,t){
 
 
 
-  this.text =function(title,scene){
+  this.text =function(title,wind,temperature,scene){
     // var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
-    dataDiv.textContent =  title + "---" + "x:" + Math.round(x) + "y:" + Math.round(y);
+    dataDiv.textContent =  title + "---" + "Wind Speed:" + wind +"  " + "Temp:" + temperature;
     dataDiv.style.left = '2em';
     dataDiv.style.top = '-1.6em';
     dataDiv.style.padding = '0';
@@ -95,7 +113,7 @@ function myDataPoints(x,y,z,r,v,t){
     dataDiv.style.paddingBottom = '1.6em';
     dataDiv.style.borderLeft = 'white solid 1.5px';
     // var dataLabel = new THREE.CSS2DObject( dataDiv );
-    var widthTest = title.length*32;
+    var widthTest = title.length*48;
     dataLabel.element.style.width = widthTest +"px";
     dataLabel.element.style.left = widthTest/2.3 +"px";
     dataLabel.position.set(x,y,z );
