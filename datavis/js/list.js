@@ -1,5 +1,5 @@
 function generateListView(){
-  console.log(countryNames);
+  // console.log(countryNames);
   for(let i =0; i<countryNames.length; i++ ){
     let divCity = document.createElement("div");
     divCity.className = "city";

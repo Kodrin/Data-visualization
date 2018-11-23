@@ -26,15 +26,30 @@
 
 <!-- THE VISUAL VIEW  -->
 <div id="visualView">
-    <div class="topRight"><a id = "switchToList" href="#">LIST VIEW</a><br><a onclick="openNav()">SEARCH</a></div>
+    <div class="topRight"><a id = "switchToList" href="#">LIST VIEW</a><br><a onclick="openAbout()">ABOUT</a><br><a onclick="openNav()">SEARCH</a></div>
     <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
     <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
 
-  <!-- SEARCH BAR -->
+<!-- ABOUT PAGE -->
+  <div id="aboutPage" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeAbout()">&times;</a>
+        <div id="aboutContainer">
+          <i>Winds of the World</i> is an interactive webGL application depicting global wind
+          speeds and temperatures through an abstract, minimalistic interface. Each moving dot
+          in the space represents a unique country, its velocity tied to the local wind speed
+          and the temperature to the z-axis of the location.
+          <br>
+          <br>
+          Codrin Tablan Negrei<br>Valerie Bourdon
+        </div>
+      </div>
+</div>
+
+<!-- SEARCH BAR -->
     <div id="searchBar" class="overlay">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-box">
-          <input type="text" placeholder="TYPE COUNTRY HERE" name="search">
+          <input id="search" type="text" placeholder="TYPE COUNTRY HERE" name="search">
         </div>
     </div>
     <canvas id="canvas">error</canvas>

@@ -153,6 +153,24 @@ a:hover {
    transition: opacity .5s;
  }
 
+
+/* ABOUT PAGE */
+  #aboutContainer {
+    position:absolute;
+    margin:auto;
+    top:-60px;
+    right:0;
+    bottom:0;
+    left:0;
+    width:50%;
+    height:20%;
+    color: #aaa;
+    font-size:.8em;
+    font-weight:200;
+    line-height: 1.5;
+  }
+
+
  /* DROP DOWN */
  .overlay {
      height: 100%;
@@ -249,6 +267,24 @@ a:hover {
     bottom:2%;
     right:2%;
   }
+
+
+/* ABOUT PAGE */
+  #aboutContainer {
+    position:absolute;
+    margin:auto;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    width:80%;
+    height:50%;
+    color: #aaa;
+    font-size:.9em;
+    font-weight:200;
+    line-height: 1.5;
+}
+
 
   /* LIST VIEW */
   .listContainer {
