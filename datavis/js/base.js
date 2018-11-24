@@ -127,7 +127,7 @@ window.onload = function(){
       // for (var i = 0; i < 10; i++) { //TO EDIT VAL
       let tempInKelvin = Math.round(data[i].main.temp - 273.15);
 
-      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.1,0.01));
+      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,tempInKelvin,Math.random() * gridHelperSize -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
       myDataDots[i].render(scene);
       myDataDots[i].text(data[i].city.findname,data[i].wind.speed,tempInKelvin,scene);
       // myDataDots[i].initTrail(scene);
