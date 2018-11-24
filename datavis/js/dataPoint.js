@@ -100,16 +100,23 @@ function myDataPoints(x,y,z,r,v,t){
   }
 
 
+
   this.text =function(title,wind,temperature,scene){
-    // var br = document.createElement('br');
+    var br = document.createElement('br');
     // var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
-    dataDiv.textContent =  title + "\r\n";
-    dataDiv.textContent +=  wind + " KM/HR" + "\r\n";
-    dataDiv.textContent +=  temperature + "°C";
-    document.body.appendChild(dataDiv);
-    dataDiv.style.whiteSpace = 'pre';
-    var widthTest = title.length*8;
+    dataDiv.textContent =  title + "/" + "WIND SPEED " + wind  +"/" + "TEMPERATURE " + temperature;
+    dataDiv.appendChild(br);
+    // dataDiv.textContent.append =  "moretext";
+    dataDiv.style.left = '2em';
+    dataDiv.style.top = '-1.6em';
+    dataDiv.style.padding = '0';
+    dataDiv.style.margin = '0';
+    dataDiv.style.paddingLeft = '1em';
+    dataDiv.style.paddingBottom = '1.6em';
+    dataDiv.style.borderLeft = 'white solid 1.5px';
+    // var dataLabel = new THREE.CSS2DObject( dataDiv );
+    var widthTest = title.length*48;
     dataLabel.element.style.width = widthTest +"px";
     dataLabel.element.style.left = widthTest/2.3 +"px";
     dataLabel.position.set(x,y,z );

@@ -121,33 +121,27 @@ window.onload = function(){
   //weatherbit api = 8f5319982b934d1e8bca2839ce4a722f
   $.getJSON( "js/weather_file.json", function( data ) {
     var items = [];
-    console.log(data);
+    // console.log(data);
     $.each( data, function( i, val ) {
       // console.log(data.wind);
-      // for (var i = 0; i < 10; i++) { //TO EDIT VAL
-      let tempInKelvin = Math.round(data[i].main.temp - 273.15);
+      for (var i = 0; i < 10; i++) {
 
       myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,Math.random() * gridHelperSize -gridHelperSize/2,1,0.1,0.01));
       myDataDots[i].render(scene);
-      myDataDots[i].text(data[i].city.findname,data[i].wind.speed,tempInKelvin,scene);
+      myDataDots[i].text(data[i].city.findname,data[i].wind.speed,data[i].main.temp,scene);
       // myDataDots[i].initTrail(scene);
             // myDataDots[i].updateTrail();
 
 
-
       let customObject ={
-        "cityname":data[i].city.findname,
-        "countryname":data[i].city.country,
-        "countrywind":data[i].wind.speed,
-        "countrytemp":tempInKelvin
-
+        "countryname":data[i].city.findname
       }
       countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA
 
       //appending datatodiv
       let listView = $("<li>");
       $(listView).text(data[i].city.findname);
-    // }
+    }
 
 
     });
