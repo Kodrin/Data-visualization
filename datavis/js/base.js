@@ -14,10 +14,10 @@ window.onload = function(){
   startTime();
 
   //grid var
-  var gridX = 100;
+  var gridX = 00;
   var gridY = 100;
   var gridZ = 100;
-  var gridSpacing = 5;
+  var gridSpacing = 100;
 
   var gridHelperSize = 100;
   var gridHelperDivisions = 100;
@@ -36,26 +36,21 @@ window.onload = function(){
 
   //three.js essemtials
   var scene = new THREE.Scene();
-  // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
   var controls = new THREE.OrbitControls( camera );
   var renderer = new THREE.WebGLRenderer();
   //set pixel ratio
   renderer.setPixelRatio( window.devicePixelRatio );
-  // renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
-
-  //document.body.appendChild( renderer.domElement );
+  //call visual view on click
   document.getElementById("visualView").appendChild(renderer.domElement);
   //initialize the 2D renderer for UI
   labelRenderer = new THREE.CSS2DRenderer();
-  // labelRenderer.setSize( window.innerWidth, window.innerHeight );
   labelRenderer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
-
+  //renderer styling
   labelRenderer.domElement.style.position = 'absolute';
   labelRenderer.domElement.style.top = 0;
   labelRenderer.domElement.style.zIndex = 0;
-  //  document.body.appendChild( labelRenderer.domElement );
   document.getElementById("visualView").appendChild(labelRenderer.domElement);
 
   //sample cube from example
@@ -70,7 +65,7 @@ window.onload = function(){
   var envWire = new THREE.WireframeGeometry( envGeo );
   var envLine = new THREE.LineSegments( envWire );
   envLine.material.depthTest = false;
-  envLine.material.opacity = 0.15;
+  envLine.material.opacity = 0.175;
   envLine.material.transparent = true;
 
   //environment axis
@@ -160,7 +155,7 @@ window.onload = function(){
   effect.uniforms[ 'scale' ].value = 6;
   composer.addPass( effect );
   var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
-  effect.uniforms[ 'amount' ].value = 0.0001;
+  effect.uniforms[ 'amount' ].value = 0.0025;
   effect.renderToScreen = true;
   composer.addPass( effect );
 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> <!--TEST-->
   <link rel="icon" type="image/png" href="favicon.png" />
   <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
   <script src = "jquery/jquery-3.3.1.min.js"></script>
 
   <script src="lib/three.js"></script>
@@ -28,19 +29,20 @@
 <div id="visualView">
     <div class="topRight"><a id = "switchToList" href="#">LIST VIEW</a><br><a onclick="openAbout()">ABOUT</a><br><a onclick="openNav()">SEARCH</a></div>
     <div class="bottomLeft">LA-203.039<br>LO-290.020<br>100%</div>
-    <div class="bottomRight">CODRIN+VAL<br>INFODESIGN<br>F-2018</div>
+    <div class="bottomRight"><a href="http://www.miha-ko.ca/">CODRIN</a>+<a href="http://www.valeriebourdon.com">VAL</a><br>INFODESIGN<br>F-2018</div>
+
 
 <!-- ABOUT PAGE -->
   <div id="aboutPage" class="overlay">
       <a href="javascript:void(0)" class="closebtn" onclick="closeAbout()">&times;</a>
         <div id="aboutContainer">
-          <i>Winds of the World</i> is an interactive webGL application depicting global wind
+          <i style="color:white;">Winds of the World</i> is an interactive webGL application depicting global wind
           speeds and temperatures through an abstract, minimalistic interface. Each moving dot
           in the space represents a unique country, its velocity tied to the local wind speed
           and the temperature to the z-axis of the location.
           <br>
           <br>
-          Codrin Tablan Negrei<br>Valerie Bourdon
+          <a href="http://www.miha-ko.ca/">Codrin Tablan Negrei</a><br><a href="http://www.valeriebourdon.com">Valerie Bourdon</a>
         </div>
       </div>
 </div>
