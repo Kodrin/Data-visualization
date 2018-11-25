@@ -4,6 +4,8 @@ function switchToList() {
 document.getElementById("visualView").style.display = "none";
 document.getElementById("listView").style.display = "block";
 document.getElementById("canvas").style.display = "none";
+controlsOn = false;
+saveCamLocation();
 generateListView();
 }
 
@@ -13,4 +15,6 @@ function switchToView() {
 document.getElementById("visualView").style.display = "block";
 document.getElementById("listView").style.display = "none";
 document.getElementById("canvas").style.display = "block";
+resetCamAtSaveLoc();
+controlsOn = true;
 }

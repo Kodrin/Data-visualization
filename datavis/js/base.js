@@ -31,6 +31,9 @@ window.onload = function(){
   //object storage
   // var gridDot = [];
 
+  //controls boolean
+  var controlsOn = true;
+
   //labels
   var labelRenderer;
 
@@ -177,16 +180,52 @@ window.onload = function(){
     composer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
 
   }
+  //reset cam
+  document.addEventListener('keypress', (event) => {
+    const keyName = event.key;
+    if(keyName == "r"){
+      resetCamLocationAtOrigin();
+    }
+
+  });
+  function resetCamLocationAtOrigin(){
+    camera.lookAt(cube.position.x,cube.position.y,cube.position.z);
+    camera.position.set( 0, 20, 100 );
+    controls.update();
+  }
+
+  function resetCamAtSaveLoc(){
+    camera.position.set( camXpos, camYpos, camZpos );
+    camera.rotation.set( camXrot, camYrot, camZrot );
+  }
+  var camXpos;
+  var camYpos;
+  var camZpos;
+  var camXrot;
+  var camYrot;
+  var camZrot;
+
+  function saveCamera(){
+    var camXpos= camera.position.x;
+    var camYpos= camera.position.y;
+    var camZpos= camera.position.z;
+    var camXrot= camera.rotation.x;
+    var camYrot= camera.rotation.y;
+    var camZrot= camera.rotation.z;
+  }
 
   //cam and orbit initiate
   //x y z
   camera.position.set( 0, 20, 100 );
   controls.update();
 
+
   var animate = function () {
     requestAnimationFrame( animate );
     //orbit controls
+    if (controlsOn) {
     controls.update();
+    }
     //regular render
     renderer.render( scene, camera );
     //compositing render
