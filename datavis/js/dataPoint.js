@@ -112,7 +112,10 @@ function myDataPoints(x,y,z,r,v,t){
     var widthTest = title.length*8;
     dataLabel.element.style.width = widthTest +"px";
     dataLabel.element.style.left = widthTest/2.3 +"px";
+    dataLabel.element.style.paddingBottom = 40 +"px";
+    dataLabel.element.style.marginTop = -40 +"px";
     dataLabel.position.set(x,y,z );
+    // dataLabel.element.style.color = 'white';
     scene.add( dataLabel );
   }
 
