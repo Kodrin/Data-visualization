@@ -237,7 +237,7 @@ a:hover {
   padding-bottom:2.5%;
   color: #8e8e8e;
   font-size:.75em;
-  width:21vw;
+  width:16vw;
   margin-right:1.5%;
   transition:.25s;
 }
@@ -245,9 +245,17 @@ a:hover {
 .city:hover {
   color:white;
   transition:.25s;
-
-
 }
+
+/*MID*/
+@media (max-width: 900px) {
+  .city {
+    padding-top:1%;
+    padding-bottom:4%;
+    width:21vw;
+  }
+}
+
 
 /* MOBILE */
 @media (max-width: 768px) {
@@ -294,21 +302,12 @@ a:hover {
 
 
   /* LIST VIEW */
-  .listContainer {
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin:2%;
-    margin-top: 15vh;
-    overflow-y: scroll;
-    height:80vh;
-  }
-
   .city {
     padding-top:1%;
     padding-bottom:4%;
     font-size:.9em;
-    width:40vw;
     margin-right:1.5%;
+    width:44vw;
+
   }
 }
