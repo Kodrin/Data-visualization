@@ -1,10 +1,10 @@
 function generateListView(){
-  console.log(countryNames);
+  // console.log(countryNames);
   for(let i =0; i<countryNames.length; i++ ){
     let divCity = document.createElement("div");
     divCity.className = "city";
     divCity.textContent = countryNames[i].cityname + ", " + countryNames[i].countryname + "\r\n";
-    divCity.textContent += countryNames[i].countrywind + " KM/HR" + "\r\n";
+    divCity.textContent += countryNames[i].countrywind + "KM/HR" + "\r\n";
     divCity.textContent += countryNames[i].countrytemp + "°C" + "\r\n";
     document.body.appendChild(divCity);
     divCity.style.whiteSpace = 'pre';

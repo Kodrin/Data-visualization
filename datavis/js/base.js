@@ -122,17 +122,15 @@ window.onload = function(){
       myDataDots[i].render(scene);
       myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,scene);
       // myDataDots[i].initTrail(scene);
-            // myDataDots[i].updateTrail();
-
-
+      // myDataDots[i].updateTrail();
 
       let customObject ={
         "cityname":data[i].city.findname,
         "countryname":data[i].city.country,
         "countrywind":data[i].wind.speed,
         "countrytemp":tempInKelvin
-
       }
+
       countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA
 
       //appending datatodiv
@@ -151,7 +149,7 @@ window.onload = function(){
   effect.uniforms[ 'scale' ].value = 6;
   composer.addPass( effect );
   var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
-  effect.uniforms[ 'amount' ].value = 0.0025;
+  effect.uniforms[ 'amount' ].value = 0.0015;
   effect.renderToScreen = true;
   composer.addPass( effect );
 

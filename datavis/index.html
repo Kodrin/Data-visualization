@@ -51,14 +51,13 @@
     <div id="searchBar" class="overlay">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-box">
-          <input id="search" type="text" placeholder="FIND A CITY" name="search" autocomplete="off">
-          <input oninput="updateResult(this.value)" type="search" placeholder="search..." />
+          <input id="search" oninput="updateResult(this.value)" type="search" placeholder="FIND A CITY" autocomplete="off"/>
         	<ul class="result">
-        		<li>sample result</li>
+        		<li>Failed to load cities</li>
         	</ul>
         </div>
     </div>
-    <canvas id="canvas">error</canvas>
+    <canvas id="canvas">Failed to load canvas</canvas>
 </div>
 
 <!-- THE LIST VIEW -->

@@ -104,9 +104,9 @@ function myDataPoints(x,y,z,r,v,t){
     // var br = document.createElement('br');
     // var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
-    dataDiv.textContent =  title + "\r\n";
+    dataDiv.textContent =  title + " ";
     dataDiv.textContent +=  country + "\r\n";
-    dataDiv.textContent +=  wind + " KM/HR" + "\r\n";
+    dataDiv.textContent +=  wind + "KM/HR" + "\r\n";
     dataDiv.textContent +=  temperature + "°C";
     document.body.appendChild(dataDiv);
     dataDiv.style.whiteSpace = 'pre';

@@ -14,8 +14,13 @@ function closeAbout() {
   document.getElementById("aboutPage").style.display = "none";
 }
 
-let arr = ["Valerie", "Codrin", "Rochelle"]
 
+let arr = ["Valerie", "Codrin", "Rochfsdfelle", "Valeridfsse", "Codrinn", "Rochelle", "Valdfsfserie", "Codrdfssin", "dfsRochelle"]
+// for(let i =0; i<countryNames.length; i++ ){
+//   let arr = i;
+// }
+
+// 
 const updateResult = query => {
 	let resultList = document.querySelector(".result");
 	resultList.innerHTML = "";
