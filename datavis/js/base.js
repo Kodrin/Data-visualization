@@ -1,11 +1,6 @@
 
 window.onload = function(){
-  //size of canvas
-  // var dimension = [document.documentElement.clientWidth, document.documentElement.clientHeight];
-  // var c = document.getElementById("canvas");
-  // c.width = dimension[0];
-  // c.height = dimension[1];
-  //
+  //canvas
   let canvas = document.getElementById("canvas");
 
   //get the context
@@ -19,8 +14,8 @@ window.onload = function(){
   var gridZ = 100;
   var gridSpacing = 100;
 
-  var gridHelperSize = 100;
-  var gridHelperDivisions = 100;
+  var gridHelperSize = 120;
+  var gridHelperDivisions = 8;
 
   //array to hold objects
   var myDataDots = [];
@@ -65,7 +60,7 @@ window.onload = function(){
   var envWire = new THREE.WireframeGeometry( envGeo );
   var envLine = new THREE.LineSegments( envWire );
   envLine.material.depthTest = false;
-  envLine.material.opacity = 0.175;
+  envLine.material.opacity = 0.19;
   envLine.material.transparent = true;
 
   //environment axis
@@ -94,12 +89,13 @@ window.onload = function(){
   var gridDotMat = new THREE.MeshBasicMaterial( { color: 0xffffff } )
 
   //defines the grid
-  var gridHelper = new THREE.GridHelper( gridHelperSize, gridHelperSize );
+  var gridHelper = new THREE.GridHelper( gridHelperSize, gridHelperDivisions );
   scene.add( gridHelper );
 
   //plane helper
   var plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
-  var helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
+  var planeMat = new THREE.MeshBasicMaterial( { color: 0xffffff} )
+  var helper = new THREE.PlaneHelper( plane, 1, planeMat );
   scene.add( helper );
 
   //background dots
@@ -124,7 +120,7 @@ window.onload = function(){
 
       myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,tempInKelvin,Math.random() * gridHelperSize -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
       myDataDots[i].render(scene);
-      myDataDots[i].text(data[i].city.findname,data[i].wind.speed,tempInKelvin,scene);
+      myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,scene);
       // myDataDots[i].initTrail(scene);
             // myDataDots[i].updateTrail();
 

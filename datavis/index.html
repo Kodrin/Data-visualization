@@ -52,6 +52,10 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-box">
           <input id="search" type="text" placeholder="FIND A CITY" name="search" autocomplete="off">
+          <input oninput="updateResult(this.value)" type="search" placeholder="search..." />
+        	<ul class="result">
+        		<li>sample result</li>
+        	</ul>
         </div>
     </div>
     <canvas id="canvas">error</canvas>
