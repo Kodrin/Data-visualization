@@ -15,12 +15,12 @@ function closeAbout() {
 }
 
 
-let arr = ["Valerie", "Codrin", "Rochfsdfelle", "Valeridfsse", "Codrinn", "Rochelle", "Valdfsfserie", "Codrdfssin", "dfsRochelle"]
+let arr = ["AL AZIZIYAH", "ACCRA", "ALEXANDRIA", "AMSTERDAM", "ANCHORAGE", "ANTALYA", "ATHENS", "BAGHDAD", "BALI", "BANGKOK", "BARCELONA", "BEIJING", "BERLIN"]
 // for(let i =0; i<countryNames.length; i++ ){
-//   let arr = i;
+//   let arr = countryNames.length;
 // }
 
-// 
+//
 const updateResult = query => {
 	let resultList = document.querySelector(".result");
 	resultList.innerHTML = "";

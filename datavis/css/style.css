@@ -134,7 +134,7 @@ a:hover {
    font-weight:300;
    line-height: 1.2;
    background: transparent;
-   opacity: 0.2;
+   opacity: 0;
    transition: opacity .5s;
    left: 0;
    top: 0;
@@ -142,8 +142,6 @@ a:hover {
    margin: 0;
    width:200px;
    text-align: left;
-   /* padding-bottom: 25px;
-   margin-top: -25px; */
  }
 
  .label:hover{

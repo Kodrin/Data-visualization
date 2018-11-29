@@ -3,11 +3,13 @@ function generateListView(){
   for(let i =0; i<countryNames.length; i++ ){
     let divCity = document.createElement("div");
     divCity.className = "city";
-    divCity.textContent = countryNames[i].cityname + ", " + countryNames[i].countryname + "\r\n";
-    divCity.textContent += countryNames[i].countrywind + "KM/HR" + "\r\n";
-    divCity.textContent += countryNames[i].countrytemp + "°C" + "\r\n";
+    divCity.textContent = countryNames[i].cityname + " " + countryNames[i].countryname + "\r\n";
+    divCity.textContent += countryNames[i].countrywind + " KM/HR" + "\r\n";
+    divCity.textContent += countryNames[i].countrytemp + "°C ";
+    divCity.textContent += countryNames[i].clouds + "\r\n";
     document.body.appendChild(divCity);
     divCity.style.whiteSpace = 'pre';
+    divCity.style.textTransform = 'uppercase';
     document.getElementsByClassName("listContainer")[0].appendChild(divCity);
   }
 }

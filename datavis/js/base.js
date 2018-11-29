@@ -118,9 +118,9 @@ window.onload = function(){
       // for (var i = 0; i < 10; i++) { //TO EDIT VAL
       let tempInKelvin = Math.round(data[i].main.temp - 273.15);
 
-      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,tempInKelvin,Math.random() * gridHelperSize -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
+      myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,tempInKelvin*1.2,Math.random() * gridHelperSize -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
       myDataDots[i].render(scene);
-      myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,scene);
+      myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,data[i].weather[0].main,data[i].clouds.all,scene);
       // myDataDots[i].initTrail(scene);
       // myDataDots[i].updateTrail();
 
@@ -128,7 +128,9 @@ window.onload = function(){
         "cityname":data[i].city.findname,
         "countryname":data[i].city.country,
         "countrywind":data[i].wind.speed,
-        "countrytemp":tempInKelvin
+        "countrytemp":tempInKelvin,
+        "clouds":data[i].weather[0].main,
+        "cloudSize":data[i].clouds.all
       }
 
       countryNames.push(customObject); // DUPLICATE AND UPDATE TO ADD DATA

@@ -100,22 +100,24 @@ function myDataPoints(x,y,z,r,v,t){
   }
 
 
-  this.text =function(title,country,wind,temperature,scene){
+  this.text =function(title,country,wind,temperature,clouds,cloudSize,scene){
     // var br = document.createElement('br');
     // var dataDiv = document.createElement( 'div' );
     dataDiv.className = 'label';
     dataDiv.textContent =  title + " ";
     dataDiv.textContent +=  country + "\r\n";
-    dataDiv.textContent +=  wind + "KM/HR" + "\r\n";
-    dataDiv.textContent +=  temperature + "°C";
+    dataDiv.textContent +=  wind + " KM/HR" + "\r\n";
+    dataDiv.textContent +=  temperature + "°C" + " ";
+    dataDiv.textContent +=  clouds;
     document.body.appendChild(dataDiv);
     dataDiv.style.whiteSpace = 'pre';
     var widthTest = title.length*8;
     dataLabel.element.style.width = widthTest +"px";
     dataLabel.element.style.left = widthTest/2.3 +"px";
-    dataLabel.element.style.paddingBottom = 40 +"px";
-    dataLabel.element.style.marginTop = -40 +"px";
+    dataLabel.element.style.paddingBottom = 4 +"%";
+    dataLabel.element.style.marginTop = -4 +"%";
     dataLabel.position.set(x,y,z );
+    dataLabel.element.style.textTransform = 'uppercase';
     // dataLabel.element.style.color = 'white';
     scene.add( dataLabel );
   }
