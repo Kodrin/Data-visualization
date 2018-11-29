@@ -107,7 +107,7 @@ function myDataPoints(x,y,z,r,v,t){
     dataDiv.textContent =  title + " ";
     dataDiv.textContent +=  country + "\r\n";
     dataDiv.textContent +=  wind + " KM/HR" + "\r\n";
-    dataDiv.textContent +=  temperature + "°C" + " ";
+    dataDiv.textContent +=  temperature + "C" + " ";
     dataDiv.textContent +=  clouds;
     document.body.appendChild(dataDiv);
     dataDiv.style.whiteSpace = 'pre';

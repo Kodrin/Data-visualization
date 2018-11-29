@@ -5,7 +5,7 @@ function generateListView(){
     divCity.className = "city";
     divCity.textContent = countryNames[i].cityname + " " + countryNames[i].countryname + "\r\n";
     divCity.textContent += countryNames[i].countrywind + " KM/HR" + "\r\n";
-    divCity.textContent += countryNames[i].countrytemp + "°C ";
+    divCity.textContent += countryNames[i].countrytemp + "C ";
     divCity.textContent += countryNames[i].clouds + "\r\n";
     document.body.appendChild(divCity);
     divCity.style.whiteSpace = 'pre';
