@@ -129,9 +129,9 @@ a:hover {
 }
 
  .label{
-   color: white;
+   color: #aaa;
    font-size:.8em;
-   font-weight:300;
+   font-weight:700;
    line-height: 1.2;
    background: transparent;
    opacity: 0;
