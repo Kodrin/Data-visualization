@@ -1,17 +1,21 @@
 function openNav() {
   document.getElementById("searchBar").style.display = "block";
+  controls.enabled = false; //disbale orbit controls
 }
 
 function closeNav() {
   document.getElementById("searchBar").style.display = "none";
+  controls.enabled = true; //re-enable orbit controls
 }
 
 function openAbout() {
   document.getElementById("aboutPage").style.display = "block";
+  controls.enabled = false; //disbale orbit controls
 }
 
 function closeAbout() {
   document.getElementById("aboutPage").style.display = "none";
+  controls.enabled = true; //re-enable orbit controls
 }
 
 
