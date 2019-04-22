@@ -2,10 +2,12 @@
 By Valerie Bourdon and Codrin Tablan Negrei
 
 #### Tasks
-1. disable orbit when clicking on UI menu
+1. ~~disable orbit when clicking on UI menu~~
 2. implement circular movement of data POINTS
-3. make the search bar work
+3. ~~make the search bar work~~
 4. change color scheme
+5. change numbers on bottom left for them to mean something
+
 
 #### Ressources
 

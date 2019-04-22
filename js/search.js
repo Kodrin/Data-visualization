@@ -1,4 +1,5 @@
 function openNav() {
+  getCountries(); //get all the countries
   document.getElementById("searchBar").style.display = "block";
   controls.enabled = false; //disbale orbit controls
 }
@@ -19,12 +20,17 @@ function closeAbout() {
 }
 
 
-let arr = ["AL AZIZIYAH", "ACCRA", "ALEXANDRIA", "AMSTERDAM", "ANCHORAGE", "ANTALYA", "ATHENS", "BAGHDAD", "BALI", "BANGKOK", "BARCELONA", "BEIJING", "BERLIN"]
-// for(let i =0; i<countryNames.length; i++ ){
-//   let arr = countryNames.length;
-// }
+let arr = []; //array to store that list of country naes
 
-//
+//fetch all the countries from countrynames list
+function getCountries(){
+  for(var i =0; i<countryNames.length; i++ ){
+    arr[i] = countryNames[i].cityname;
+  }
+  updateResult(""); //update the query results
+}
+
+// allows for querying
 const updateResult = query => {
 	let resultList = document.querySelector(".result");
 	resultList.innerHTML = "";
@@ -38,4 +44,4 @@ const updateResult = query => {
 	})
 }
 
-updateResult("")
+updateResult(""); //update the results
