@@ -13,9 +13,9 @@ THIS SCRIPT POPULATES EVERYTHING ELSE ASIDE FROM THE DATA POINTS
 // var axisBounds = 500; //bounds of x,y,z axis
 
 //sample cube from example
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
-var cube = new THREE.Mesh( geometry, material );
+// var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+// var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+// var cube = new THREE.Mesh( geometry, material );
 
 //environment limits
 var lineMat = new THREE.LineBasicMaterial( { color: 0xff0000 } );
@@ -64,7 +64,7 @@ for (var i = 0; i < starCount; i++) {
 }
 
 //adding env objects
-scene.add( cube );
+// scene.add( cube );
 scene.add(envLine);
 scene.add(lineX);
 scene.add(lineY);

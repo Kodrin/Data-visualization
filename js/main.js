@@ -23,6 +23,7 @@ var axisBounds = 500; //bounds of x,y,z axis
 
 var myDataDots = []; //array to hold my dots
 
+
 //SETS THE PIXEL RATIO
 //set pixel ratio
 renderer.setPixelRatio( window.devicePixelRatio );
@@ -38,6 +39,24 @@ labelRenderer.domElement.style.top = 0;
 labelRenderer.domElement.style.zIndex = 0;
 document.getElementById("visualView").appendChild(labelRenderer.domElement);
 
+//orbit
+var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+var material = new THREE.MeshBasicMaterial( { color: 0x000000 } );
+var centerOrbit = new THREE.Mesh( geometry, material );
+scene.add(centerOrbit);
+
+var pivotPoints = [];
+// function InsertPivotPoints(){
+//   // for (var i = 0; i < myDataDots.length; i++) {
+//     pivotPoints[i] = new THREE.Object3D();
+//     centerOrbit.add(pivotPoints[i]);
+//     console.log(pivotPoints[i]);
+//   // }
+// }
+
+//pivot point
+// var pivotPoint = new THREE.Object3D();
+// centerOrbit.add(pivotPoint);
 
 
 //DATA LOADING AND SPAWNING OF DATA POINTS
@@ -47,14 +66,16 @@ window.onload = function(){ //wait for it to load
 //weatherbit api = 8f5319982b934d1e8bca2839ce4a722f
 $.getJSON( "js/weather_file.json", function( data ) {
   var items = [];
-  console.log(data); //debug
+  // console.log(data); //debug
   //for each data entry in our json file
   $.each( data, function( i, val ) {
     let tempInKelvin = Math.round(data[i].main.temp - 273.15); //convert the temperature to kelvin
 
-    myDataDots.push(new myDataPoints(Math.random() * gridHelperSize -gridHelperSize/2,tempInKelvin*1.2,Math.random() * gridHelperSize -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
-    myDataDots[i].render(scene);
-    myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,data[i].weather[0].main,data[i].clouds.all,scene);
+    myDataDots.push(new myDataPoints(Math.random() * 100 -gridHelperSize/2,tempInKelvin*4 -60,Math.random() * 100 -gridHelperSize/2,data[i].clouds.all *0.05,data[i].wind.speed * 0.005,0.01));
+    pivotPoints[i] = new THREE.Object3D();
+    centerOrbit.add(pivotPoints[i]); //parent it to center orbit
+    myDataDots[i].render(pivotPoints[i]); //parent the dots to those pivots
+    myDataDots[i].text(data[i].city.findname,data[i].city.country,data[i].wind.speed,tempInKelvin,data[i].weather[0].main,data[i].clouds.all,pivotPoints[i]);
 
     //custom object to insert our data into a structure
     let customObject ={
@@ -100,7 +121,6 @@ function onWindowResize() {
   composer.setSize( document.documentElement.clientWidth, document.documentElement.clientHeight );
 
 }
-
 //SET THE CAMERA POSITION
 camera.position.set( 0, 20, 100 );
 
@@ -111,13 +131,12 @@ var animate = function () {
   renderer.render( scene, camera ); //regular render to render scene
   composer.render(); //compositing render
   labelRenderer.render( scene, camera ); //laber render
-
-  //animate each data point in the array
+  // pivotPoint.rotation.y += 0.005;
   for (var i = 0; i < myDataDots.length; i++) {
-    myDataDots[i].animate();
+    // pivotPoints[i].rotation.y += 0.001;
+    myDataDots[i].animate(pivotPoints[i]);
   }
-
-};
+}
 
 //FUNCTIONS TO INIT
 startTime(); //starts the timer from date.js

@@ -25,7 +25,7 @@ let arr = []; //array to store that list of country naes
 //fetch all the countries from countrynames list
 function getCountries(){
   for(var i =0; i<countryNames.length; i++ ){
-    arr[i] = countryNames[i].cityname;
+    arr[i] = countryNames[i].cityname + "," + countryNames[i].countrywind + " KM/HR" + "," + countryNames[i].countrytemp + "C " + countryNames[i].clouds;
   }
   updateResult(""); //update the query results
 }

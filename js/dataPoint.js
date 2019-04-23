@@ -33,20 +33,20 @@ function myDataPoints(x,y,z,r,v,t){
   this.trailLine = new THREE.Line(geometry, this.lineMaterial);
 
   //member function
-  this.animate =function(){
+  this.animate =function(pivot){
     // datapoint.position.x +=  v;
     // datapoint.rotation.x +=  t;
 
-    datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
-    datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
-    if (datapoint.position.x > 100) {
-      datapoint.position.x +=  Math.sin(datapoint.position.y + Math.PI/2) * v *2;
-      datapoint.position.z +=  -Math.cos(datapoint.position.y + Math.PI/2) * v *2;
-      datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
-      datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
-    }
+    // datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
+    // datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
+    // if (datapoint.position.x > 100) {
+    //   datapoint.position.x +=  Math.sin(datapoint.position.y + Math.PI/2) * v *2;
+    //   datapoint.position.z +=  -Math.cos(datapoint.position.y + Math.PI/2) * v *2;
+    //   datapoint.position.x -=  Math.sin(datapoint.position.y) * v;
+    //   datapoint.position.z -=  -Math.cos(datapoint.position.y) * v;
+    // }
 
-    // datapoint.rotation.x +=  t;
+    pivot.rotation.y +=  v *0.05;
 
     //update the labels
     dataLabel.position.x = datapoint.position.x;
